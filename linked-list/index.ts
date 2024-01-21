@@ -1,19 +1,19 @@
-class SingleNode<T> {
-    public next: SingleNode<T> | null = null;
-    public prev: SingleNode<T> | null = null;
+class Node<T> {
+    public next: Node<T> | null = null;
+    public prev: Node<T> | null = null;
 
     constructor(public value: T) {}
 }
 
 class LinkedList<T> {
-    private head: SingleNode<T> | null = null;
+    private head: Node<T> | null = null;
 
-    private getLast(node: SingleNode<T>): SingleNode<T> {
+    private getLast(node: Node<T>): Node<T> {
         return node.next === null ? node : this.getLast(node.next);
     }
 
-    insertAtBegin(value: T): SingleNode<T> {
-        const node = new SingleNode(value);
+    insertAtBegin(value: T): Node<T> {
+        const node = new Node(value);
 
         if (this.head === null) {
             this.head = node;
@@ -32,7 +32,7 @@ class LinkedList<T> {
         this.deleteNode(node);
     }
 
-    deleteNode(node: SingleNode<T>) {
+    deleteNode(node: Node<T>) {
         if (node.prev === null) {
             return;
         }
@@ -40,7 +40,7 @@ class LinkedList<T> {
         node.prev.next = node.next;
     }
 
-    findNodeByValue(value: T): SingleNode<T> | null {
+    findNodeByValue(value: T): Node<T> | null {
         let head = this.head;
 
         while(head !== null) {
@@ -54,8 +54,8 @@ class LinkedList<T> {
         return null;
     }
 
-    insertAtEnd(value: T): SingleNode<T> {
-        const node = new SingleNode(value);
+    insertAtEnd(value: T): Node<T> {
+        const node = new Node(value);
 
         if (this.head === null) {
             this.head = node;
